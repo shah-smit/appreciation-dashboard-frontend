@@ -6,6 +6,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+
+```
+rm -rf ~/Documents/Dev/aws-cdk/cdk-cloud-formation-appreciation-dashboard/static-website/
+cp -a build/. ~/Documents/Dev/aws-cdk/cdk-cloud-formation-appreciation-dashboard/static-website/
+```
+
+or
+
+```
+aws s3 sync build s3://dashboardstack-cdkdashboardpublicbucket47e6e289-10s6nkvh4jksh
+```
+
 ### `npm start`
 
 Runs the app in the development mode.\
