@@ -1,11 +1,9 @@
 import logo from './logo.svg';
+import './ListMessage.css';
 import env from './aws-exports'
 import React, { useState, useEffect } from 'react';
-import ListMessage from './ListMessage';
-import AddMessage from './AddMessage';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-function App() {
+function ListMessage() {
   const [messages, setMessages] = useState([]);
 
   async function readMessages() {
@@ -29,19 +27,20 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route path="/" exact="true">
-            <ListMessage />
-          </Route>
-          <Route path="/new">
-            <AddMessage />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <div class="container">
+        {
+          messages.map(msg => (
+            <div class="card">
+                <h1>{msg.nickname}</h1>
+                <p>{msg.message}</p>
+                <p>Thank you,</p>
+                <p>{msg.senderName}</p>
+                <p><img src="" alt="alternative" /></p>
+              </div>
+          ))
+        }
+    </div>
   );
 }
 
-export default App;
+export default ListMessage;
