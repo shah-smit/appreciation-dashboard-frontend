@@ -8,6 +8,7 @@ import Register from './Auth/Register';
 import VerifyAccount from './Auth/VerifyAccount';
 import Navbar from './CustomNavbar';
 import { Auth } from 'aws-amplify';
+import './App.css'
 
 export default class App extends Component {
 

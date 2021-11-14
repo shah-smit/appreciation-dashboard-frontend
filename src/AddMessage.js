@@ -102,72 +102,71 @@ class AddMessage extends Component {
     render() {
 
         return (
-            <div class="container">
-                <div>
-                    <Form onSubmit={this.handleSubmit}>
-                        <Row className="mb-3">
-                            <Form.Group as={Col} controlId="exampleForm.ControlInput1">
-                                <Form.Label>Receiver</Form.Label>
-                                <Form.Control className="input"
-                                    type="text"
-                                    id="to"
-                                    aria-describedby="usernameHelp"
-                                    placeholder="Receiver Email"
-                                    value={this.state.to}
-                                    onChange={this.onInputChange} />
-                            </Form.Group>
-                            <Form.Group as={Col} controlId="exampleForm.ControlInput1">
-                                <Form.Label>Nick Name</Form.Label>
-                                <Form.Control className="input"
-                                    type="text"
-                                    id="nickname"
-                                    placeholder="Receiver Nick Name"
-                                    value={this.state.nickname}
-                                    onChange={this.onInputChange} />
-                            </Form.Group>
-                        </Row>
 
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Message</Form.Label>
-                            <Form.Control as="textarea" rows={3}
-                                onChange={this.onInputChange}
-                                id="message" />
+            <div>
+                <Form onSubmit={this.handleSubmit}>
+                    <Row className="mb-3">
+                        <Form.Group as={Col} controlId="exampleForm.ControlInput1">
+                            <Form.Label>Receiver</Form.Label>
+                            <Form.Control className="input"
+                                type="text"
+                                id="to"
+                                aria-describedby="usernameHelp"
+                                placeholder="Receiver Email"
+                                value={this.state.to}
+                                onChange={this.onInputChange} />
+                        </Form.Group>
+                        <Form.Group as={Col} controlId="exampleForm.ControlInput1">
+                            <Form.Label>Nick Name</Form.Label>
+                            <Form.Control className="input"
+                                type="text"
+                                id="nickname"
+                                placeholder="Receiver Nick Name"
+                                value={this.state.nickname}
+                                onChange={this.onInputChange} />
+                        </Form.Group>
+                    </Row>
+
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Message</Form.Label>
+                        <Form.Control as="textarea" rows={3}
+                            onChange={this.onInputChange}
+                            id="message" />
+                    </Form.Group>
+
+                    <Row className="mb-3">
+                        <Form.Group as={Col} controlId="exampleForm.ControlInput1">
+                            <Form.Label>Sender Email</Form.Label>
+                            <Form.Control className="input"
+                                type="text"
+                                id="from"
+                                placeholder="Sender Email"
+                                value={this.state.from}
+                                disabled />
                         </Form.Group>
 
-                        <Row className="mb-3">
-                            <Form.Group as={Col} controlId="exampleForm.ControlInput1">
-                                <Form.Label>Sender Email</Form.Label>
-                                <Form.Control className="input"
-                                    type="text"
-                                    id="from"
-                                    placeholder="Sender Email"
-                                    value={this.state.from}
-                                    disabled />
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="exampleForm.ControlInput1">
-                                <Form.Label>Sender Name</Form.Label>
-                                <Form.Control className="input"
-                                    type="text"
-                                    id="senderName"
-                                    placeholder=" Sender Name"
-                                    value={this.state.senderName}
-                                    disabled />
-                            </Form.Group>
-                        </Row>
-                        <Form.Group className="mb-3" controlId="formFile">
-                            <Form.Label>Upload Image</Form.Label>
-                            <Form.Control
-                                type="file"
-                                accept="image/png, image/jpeg"
-                                onChange={this.onImageChange}
-                            />
+                        <Form.Group as={Col} controlId="exampleForm.ControlInput1">
+                            <Form.Label>Sender Name</Form.Label>
+                            <Form.Control className="input"
+                                type="text"
+                                id="senderName"
+                                placeholder=" Sender Name"
+                                value={this.state.senderName}
+                                disabled />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Add Message
-                        </Button>
-                    </Form>
-                </div>
+                    </Row>
+                    <Form.Group className="mb-3" controlId="formFile">
+                        <Form.Label>Upload Image</Form.Label>
+                        <Form.Control
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            onChange={this.onImageChange}
+                        />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        Add Message
+                    </Button>
+                </Form>
             </div>
         );
     }
