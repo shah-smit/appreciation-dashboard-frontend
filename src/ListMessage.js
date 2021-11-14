@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './ListMessage.css';
 import env from './aws-exports'
 import React, { useState, useEffect } from 'react';
@@ -35,7 +34,7 @@ function ListMessage() {
                 <p>{msg.message}</p>
                 <p>Thank you,</p>
                 <p>{msg.senderName}</p>
-                <p><img src="" alt="alternative" /></p>
+                <p><img src={msg.imageUrl} alt="alternative" /></p>
               </div>
           ))
         }
