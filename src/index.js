@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Amplify  from 'aws-amplify';
 import config from './aws-exports';
+import { Auth } from 'aws-amplify';
 
 Amplify.configure({
   Auth: {
@@ -18,6 +19,22 @@ Amplify.configure({
   Storage: {
     region: config.cognito.REGION,
     bucket: config.s3.bucket
+  },
+  API: {
+    endpoints: [
+      {
+        name: 'createRecord',
+        endpoint: config.api.invokeUrl,
+        path: '/',
+        custom_header: async () => { 
+          //   return { Authorization : 'token' } 
+          //   // Alternatively, with Cognito User Pools use this:
+          //   // return { Authorization: `Bearer ${(await Auth.currentSession()).getAccessToken().getJwtToken()}` }
+          // return { Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}` }
+          return { Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}` };
+        }
+      }
+    ]
   }
 });
 ReactDOM.render(

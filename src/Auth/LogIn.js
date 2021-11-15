@@ -45,6 +45,7 @@ class LogIn extends Component {
     render() {
         return (
             <Form onSubmit={this.handleSubmit}>
+                <h2 align="center">Log In</h2>
                 <Form.Group className="mb-3" controlId="inlineFormInputGroup">
                     <Form.Label>Username</Form.Label>
                     <Form.Control type="text" placeholder="Enter email" id="username" value={this.state.username} onChange={this.onInputChange} />

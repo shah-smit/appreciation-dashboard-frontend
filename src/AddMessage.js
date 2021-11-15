@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import env from './aws-exports'
-import { Auth, Storage } from 'aws-amplify';
+import { API, Auth, Storage } from 'aws-amplify';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { withRouter } from 'react-router';
+
+
+async function addMessage(message){
+    const myInit = { // OPTIONAL
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        body: message
+      };
+    let apiResponse = await API.post("createRecord", "/", myInit);
+    let results = [ apiResponse ];
+    return Promise.resolve(results);
+}
 
 class AddMessage extends Component {
 
@@ -49,17 +62,18 @@ class AddMessage extends Component {
                 "imageUrl": "https://" + env.s3.bucket + ".s3.ap-southeast-1.amazonaws.com/private/" + this.state.identity + "/" + res.key
             }
             console.log("req to lambda", result)
-            fetch(env.write_lambda, {
-                method: "POST",
-                body: JSON.stringify(result)
-            }).then(data => {
-                // do what you need with the data from the post request
-            });
+            // fetch(env.write_lambda, {
+            //     method: "POST",
+            //     body: JSON.stringify(result)
+            // }).then(data => {
+            //     // do what you need with the data from the post request
+            // });
+            addMessage(result).then((lres) => {
+                
+            })            
         }).catch(err => {
             this.setState({ response: `Cannot uploading file: ${err}` });
         });
-
-
 
     })
 
@@ -85,7 +99,7 @@ class AddMessage extends Component {
         Auth.currentUserInfo()
             .then(response => {
                 console.log('test {}', JSON.stringify(response));
-                if (response == null) {
+                if (JSON.stringify(response) == null) {
                     this.props.history.push('/new');
                 } else {
                     this.setState({

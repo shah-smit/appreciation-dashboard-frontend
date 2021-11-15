@@ -23,7 +23,7 @@ export default class CustomNavbar extends Component {
                                     )}
                                 </Nav.Link>
                                 {!isAuthenticated && (
-                                    <Nav.Link eventKey={2} href="/register">
+                                    <Nav.Link eventKey={2} href="/signup">
                                         <strong>Register</strong>
                                     </Nav.Link>
                                 )}
