@@ -10,7 +10,7 @@ function ListMessage() {
       method: 'GET'
     };
 
-    fetch(env.read_lambda, requestOptions)
+    fetch(process.env.REACT_APP_API_GATEWAY_URL, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result[0])

@@ -59,7 +59,7 @@ class AddMessage extends Component {
                 "from": this.state.from,
                 "nickName": this.state.nickname,
                 "senderName": this.state.senderName,
-                "imageUrl": "https://" + env.s3.bucket + ".s3.ap-southeast-1.amazonaws.com/private/" + this.state.identity + "/" + res.key
+                "imageUrl": "https://" + process.env.REACT_APP_S3_BUCKET + ".s3.ap-southeast-1.amazonaws.com/private/" + this.state.identity + "/" + res.key
             }
             console.log("req to lambda", result)
             // fetch(env.write_lambda, {

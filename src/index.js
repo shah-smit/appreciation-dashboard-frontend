@@ -11,26 +11,22 @@ import { Auth } from 'aws-amplify';
 
 Amplify.configure({
   Auth: {
-    region: config.cognito.REGION,
-    userPoolId: config.cognito.USER_POOL_ID,
-    userPoolWebClientId: config.cognito.APP_CLIENT_ID,
-    identityPoolId: config.cognito.IDENTITY_POOL_ID
+    region: process.env.REACT_APP_REGION,
+    userPoolId: process.env.REACT_APP_USER_POOL_ID,
+    userPoolWebClientId: process.env.REACT_APP_APP_CLIENT_ID,
+    identityPoolId: process.env.REACT_APP_IDENTITY_POOL_ID
   },
   Storage: {
-    region: config.cognito.REGION,
-    bucket: config.s3.bucket
+    region: process.env.REACT_APP_REGION,
+    bucket: process.env.REACT_APP_S3_BUCKET
   },
   API: {
     endpoints: [
       {
         name: 'createRecord',
-        endpoint: config.api.invokeUrl,
+        endpoint: process.env.REACT_APP_API_GATEWAY_URL,
         path: '/',
         custom_header: async () => { 
-          //   return { Authorization : 'token' } 
-          //   // Alternatively, with Cognito User Pools use this:
-          //   // return { Authorization: `Bearer ${(await Auth.currentSession()).getAccessToken().getJwtToken()}` }
-          // return { Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}` }
           return { Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}` };
         }
       }
