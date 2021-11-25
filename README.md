@@ -15,7 +15,7 @@ cp -a build/. ~/Documents/Dev/aws-cdk/cdk-cloud-formation-appreciation-dashboard
 or
 
 ```
-aws s3 sync build s3://dashboardstack-cdkdashboardpublicbucket47e6e289-10s6nkvh4jksh
+aws s3 sync build s3://dashboardstack-cdkdashboardpublicbucket47e6e289-74upr3kfvtuh
 ```
 
 ### `npm start`

@@ -43,37 +43,41 @@ class AddMessage extends Component {
         console.log(e)
         console.log(this.state)
 
-        Storage.put(
-            `photos/${this.state.image.name}`,
-            this.state.image,
-            { contentType: this.state.image.type, level: 'private' }
-        ).then((res) => {
-            this.upload = null;
-            this.setState(() => ({
-                response: 'Success uploading file!',
-            }));
-            console.log("res from storage", res)
-            var result = {
-                "to": this.state.to,
-                "message": this.state.message,
-                "from": this.state.from,
-                "nickName": this.state.nickname,
-                "senderName": this.state.senderName,
-                "imageUrl": "https://" + process.env.REACT_APP_S3_BUCKET + ".s3.ap-southeast-1.amazonaws.com/private/" + this.state.identity + "/" + res.key
-            }
-            console.log("req to lambda", result)
-            // fetch(env.write_lambda, {
-            //     method: "POST",
-            //     body: JSON.stringify(result)
-            // }).then(data => {
-            //     // do what you need with the data from the post request
-            // });
-            addMessage(result).then((lres) => {
+        var result = {
+            "to": this.state.to,
+            "message": this.state.message,
+            "from": this.state.from,
+            "nickName": this.state.nickname,
+            "senderName": this.state.senderName,
+            "imageUrl": ""
+        }
+
+        if(this.state.image && this.state.image.name && process.env.REACT_APP_S3_BUCKET){
+            Storage.put(
+                `photos/${this.state.image.name}`,
+                this.state.image,
+                { contentType: this.state.image.type, level: 'private' }
+            ).then((res) => {
+                this.upload = null;
+                this.setState(() => ({
+                    response: 'Success uploading file!',
+                }));
                 
-            })            
-        }).catch(err => {
-            this.setState({ response: `Cannot uploading file: ${err}` });
-        });
+                result.imageUrl = "https://" + process.env.REACT_APP_S3_BUCKET + ".s3.ap-southeast-1.amazonaws.com/private/" + this.state.identity + "/" + res.key
+                addMessage(result).then((lres) => {
+                    console.log("Added Message & Image");
+                    this.props.history.push('/');
+                });
+            }).catch(err => {
+                this.setState({ response: `Cannot uploading file: ${err}` });
+            });
+        } else {
+            addMessage(result).then((lres) => {
+                console.log("Added Message");
+                this.props.history.push('/');
+            });
+        }
+        
 
     })
 

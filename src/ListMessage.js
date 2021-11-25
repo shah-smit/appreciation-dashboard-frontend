@@ -1,6 +1,7 @@
 import './ListMessage.css';
 import env from './aws-exports'
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router';
 
 function ListMessage() {
   const [messages, setMessages] = useState([]);
@@ -42,4 +43,4 @@ function ListMessage() {
   );
 }
 
-export default ListMessage;
+export default withRouter(ListMessage);
